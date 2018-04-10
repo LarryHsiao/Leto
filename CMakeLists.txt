@@ -7,30 +7,34 @@ project(${PROJECT_NAME})
 set(CMAKE_CXX_STANDARD 14)
 
 include_directories(include)
+set(headers include/leto.h include/sensors/sensor.h include/temperature/temperature.h)
+set(sources src/leto.cpp)
+add_library(${CORE_NAME} ${headers} ${sources})
 
-set(include
-        include/leto.h
-        include/sensors/sensor.h include/sensors/temperature_sensor.h)
+# curl ==========
+configure_file(libs/curl/CMakeLists.txt libs/curl/CMakeLists.txt)
+execute_process(COMMAND "${CMAKE_COMMAND}" -G "${CMAKE_GENERATOR}" . WORKING_DIRECTORY "${CMAKE_BINARY_DIR}/libs/curl")
+execute_process(COMMAND "${CMAKE_COMMAND}" --build . WORKING_DIRECTORY "${CMAKE_BINARY_DIR}/libs/curl/")
+add_subdirectory("${CMAKE_BINARY_DIR}/libs/curl/source/" "${CMAKE_BINARY_DIR}/libs/curl/build")
+include_directories("${CMAKE_BINARY_DIR}/libs/curl/source/include")
+target_link_libraries(${CORE_NAME} libcurl)
+# curl ----------
 
-aux_source_directory(src sources)
-
-add_library(${CORE_NAME} ${include} ${sources})
-
+# main ==========
 add_executable(${PROJECT_NAME} main.cpp)
 target_link_libraries(${PROJECT_NAME} pthread)
 target_link_libraries(${PROJECT_NAME} ${CORE_NAME})
+# main ----------
 
 # Unit testing ==========
 configure_file(test/CMakeLists.txt test/gtest-download/CMakeLists.txt)
 execute_process(COMMAND "${CMAKE_COMMAND}" -G "${CMAKE_GENERATOR}" . WORKING_DIRECTORY "${CMAKE_BINARY_DIR}/test/gtest-download")
 execute_process(COMMAND "${CMAKE_COMMAND}" --build . WORKING_DIRECTORY "${CMAKE_BINARY_DIR}/test/gtest-download")
-
 # available targets: gtest, gtest_main, gmock and gmock_main
 add_subdirectory("${CMAKE_BINARY_DIR}/test/gtest-src" "${CMAKE_BINARY_DIR}/test/gtest-build")
 
 enable_testing()
-aux_source_directory(test test_src)
-
+set(test_src test/leto_test.cpp test/libs/curl/edge.cpp)
 add_executable(${TEST_NAME} ${test_src})
 target_link_libraries(${TEST_NAME} gtest gtest_main)
 target_link_libraries(${TEST_NAME} ${CORE_NAME})
