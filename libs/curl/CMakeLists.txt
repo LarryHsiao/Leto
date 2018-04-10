@@ -5,7 +5,7 @@ project(curl)
 include(ExternalProject)
 ExternalProject_Add(curl
         GIT_REPOSITORY https://github.com/curl/curl.git
-        GIT_TAG master
+        GIT_TAG curl-7_59_0
         SOURCE_DIR "${CMAKE_BINARY_DIR}/libs/curl/source"
         BINARY_DIR "${CMAKE_BINARY_DIR}/libs/curl/build"
         CONFIGURE_COMMAND ""
