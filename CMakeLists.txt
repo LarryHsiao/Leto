@@ -29,6 +29,15 @@ include_directories("${CMAKE_BINARY_DIR}/libs/json/source/include")
 target_link_libraries(${CORE_NAME} nlohmann_json)
 # json ----------
 
+# web server ==========
+configure_file(libs/web_server.cmake libs/web_server/CMakeLists.txt)
+execute_process(COMMAND "${CMAKE_COMMAND}" -G "${CMAKE_GENERATOR}" . WORKING_DIRECTORY "${CMAKE_BINARY_DIR}/libs/web_server/")
+execute_process(COMMAND "${CMAKE_COMMAND}" --build . WORKING_DIRECTORY "${CMAKE_BINARY_DIR}/libs/web_server/")
+add_subdirectory("${CMAKE_BINARY_DIR}/libs/web_server/source/" "${CMAKE_BINARY_DIR}/libs/web_server/build")
+include_directories("${CMAKE_BINARY_DIR}/libs/web_server/source/include")
+target_link_libraries(${CORE_NAME} simple-web-server)
+# web server ----------
+
 # main ==========
 add_executable(${PROJECT_NAME} main.cpp)
 target_link_libraries(${PROJECT_NAME} pthread)
@@ -43,7 +52,7 @@ execute_process(COMMAND "${CMAKE_COMMAND}" --build . WORKING_DIRECTORY "${CMAKE_
 add_subdirectory("${CMAKE_BINARY_DIR}/test/gtest-src" "${CMAKE_BINARY_DIR}/test/gtest-build")
 
 enable_testing()
-set(test_src test/leto_test.cpp test/libs/curl/curl.cpp test/libs/json/json.cpp)
+set(test_src test/leto_test.cpp test/libs/curl/curl.cpp test/libs/json/json.cpp test/libs/web_server/web_server.cpp)
 add_executable(${TEST_NAME} ${test_src})
 target_link_libraries(${TEST_NAME} gtest gtest_main)
 target_link_libraries(${TEST_NAME} ${CORE_NAME})

@@ -15,7 +15,7 @@ TEST(curl, GetHttps_withVerify) {
     curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, emptyCallback);
     CURLcode response = curl_easy_perform(curl);
     curl_easy_cleanup(curl);
-    ASSERT_EQ(response ,CURLE_OK);
+    ASSERT_EQ(response ,CURLE_SSL_CACERT);
 }
 
 TEST(curl, GetHttps_noVerify) {
