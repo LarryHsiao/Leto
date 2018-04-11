@@ -8,16 +8,17 @@ size_t emptyCallback(char *ptr, size_t size, size_t nmemb, void *userdata) {
     return size*nmemb;
 }
 
-TEST(REQUEST, GetFailed_withoutCertfication) {
+TEST(curl, GetHttps_withVerify) {
     CURL* curl = curl_easy_init();
     curl_easy_setopt(curl, CURLOPT_URL, "https://google.com");
     curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1L);
+    curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, emptyCallback);
     CURLcode response = curl_easy_perform(curl);
     curl_easy_cleanup(curl);
-    ASSERT_EQ(response ,CURLE_SSL_CACERT);
+    ASSERT_EQ(response ,CURLE_OK);
 }
 
-TEST(REQUEST, GetFailed_noCheckingCACert) {
+TEST(curl, GetHttps_noVerify) {
     CURL* curl = curl_easy_init();
     curl_easy_setopt(curl, CURLOPT_URL, "https://google.com");
     curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1L);

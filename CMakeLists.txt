@@ -12,13 +12,22 @@ set(sources src/leto.cpp)
 add_library(${CORE_NAME} ${headers} ${sources})
 
 # curl ==========
-configure_file(libs/curl/CMakeLists.txt libs/curl/CMakeLists.txt)
-execute_process(COMMAND "${CMAKE_COMMAND}" -G "${CMAKE_GENERATOR}" . WORKING_DIRECTORY "${CMAKE_BINARY_DIR}/libs/curl")
+configure_file(libs/curl.cmake libs/curl/CMakeLists.txt)
+execute_process(COMMAND "${CMAKE_COMMAND}" -G "${CMAKE_GENERATOR}" . WORKING_DIRECTORY "${CMAKE_BINARY_DIR}/libs/curl/")
 execute_process(COMMAND "${CMAKE_COMMAND}" --build . WORKING_DIRECTORY "${CMAKE_BINARY_DIR}/libs/curl/")
 add_subdirectory("${CMAKE_BINARY_DIR}/libs/curl/source/" "${CMAKE_BINARY_DIR}/libs/curl/build")
 include_directories("${CMAKE_BINARY_DIR}/libs/curl/source/include")
 target_link_libraries(${CORE_NAME} libcurl)
 # curl ----------
+
+# json ==========
+configure_file(libs/json.cmake libs/json/CMakeLists.txt)
+execute_process(COMMAND "${CMAKE_COMMAND}" -G "${CMAKE_GENERATOR}" . WORKING_DIRECTORY "${CMAKE_BINARY_DIR}/libs/json/")
+execute_process(COMMAND "${CMAKE_COMMAND}" --build . WORKING_DIRECTORY "${CMAKE_BINARY_DIR}/libs/json/")
+add_subdirectory("${CMAKE_BINARY_DIR}/libs/json/source/" "${CMAKE_BINARY_DIR}/libs/json/build")
+include_directories("${CMAKE_BINARY_DIR}/libs/json/source/include")
+target_link_libraries(${CORE_NAME} nlohmann_json)
+# json ----------
 
 # main ==========
 add_executable(${PROJECT_NAME} main.cpp)
@@ -34,7 +43,7 @@ execute_process(COMMAND "${CMAKE_COMMAND}" --build . WORKING_DIRECTORY "${CMAKE_
 add_subdirectory("${CMAKE_BINARY_DIR}/test/gtest-src" "${CMAKE_BINARY_DIR}/test/gtest-build")
 
 enable_testing()
-set(test_src test/leto_test.cpp test/libs/curl/edge.cpp)
+set(test_src test/leto_test.cpp test/libs/curl/curl.cpp test/libs/json/json.cpp)
 add_executable(${TEST_NAME} ${test_src})
 target_link_libraries(${TEST_NAME} gtest gtest_main)
 target_link_libraries(${TEST_NAME} ${CORE_NAME})
