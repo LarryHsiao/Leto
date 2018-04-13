@@ -7,8 +7,8 @@ project(${PROJECT_NAME})
 set(CMAKE_CXX_STANDARD 14)
 
 include_directories(include)
-set(headers include/leto.h include/sensors/sensor.h include/temperature/temperature.h)
-set(sources src/leto.cpp)
+set(headers include/leto.h include/sensors/sensor.h include/temperature/temperature.h include/utility/web_browser.h)
+set(sources src/core/leto.cpp)
 add_library(${CORE_NAME} ${headers} ${sources})
 
 # curl ==========
@@ -39,7 +39,7 @@ target_link_libraries(${CORE_NAME} simple-web-server)
 # web server ----------
 
 # main ==========
-add_executable(${PROJECT_NAME} main.cpp)
+add_executable(${PROJECT_NAME} src/main/main.cpp src/main/utility/netsurf.cpp src/main/utility/netsurf.h)
 target_link_libraries(${PROJECT_NAME} pthread)
 target_link_libraries(${PROJECT_NAME} ${CORE_NAME})
 # main ----------
