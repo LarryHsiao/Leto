@@ -1,0 +1,14 @@
+//
+// Created by Larry Hsiao on 4/14/2018.
+//
+
+#include <gtest/gtest.h>
+#include "utility/curl_escape.h"
+
+TEST(CurlUrl, escape){
+    CurlUrlEscape curlUrl("https://google.com?param=\\/fds");
+    std::string result = curlUrl.escape();
+    std::string expected("https%3A%2F%2Fgoogle.com%3Fparam%3D%5C%2Ffds");
+    ASSERT_EQ(expected,result);
+}
+

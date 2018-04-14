@@ -7,8 +7,7 @@
 
 #include <spotify/auth.h>
 #include <utility/web_browser.h>
-#include "config/config.h"
-#include "../../main/utility/netsurf.h"
+#include <spotify/config/config.h>
 
 class AuthImpl : public Auth {
 public:

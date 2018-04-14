@@ -7,8 +7,8 @@ project(${PROJECT_NAME})
 set(CMAKE_CXX_STANDARD 14)
 
 include_directories(include)
-set(headers include/leto.h include/utility/web_browser.h include/spotify/auth.h include/utility/url.h)
-set(sources src/core/leto.cpp src/core/spotify/auth_impl.cpp src/core/spotify/config/config.cpp src/core/spotify/auth_impl.h src/core/spotify/config/config.h src/core/utility/curl_url.cpp src/core/utility/curl_url.h)
+set(headers include/leto.h include/utility/web_browser.h include/spotify/auth.h include/utility/url_escape.h)
+set(sources src/core/leto.cpp src/core/spotify/auth_impl.cpp src/core/spotify/config/config.cpp include/spotify/auth_impl.h include/spotify/config/config.h src/core/utility/curl_escape.cpp include/utility/curl_escape.h)
 add_library(${CORE_NAME} ${headers} ${sources})
 
 # curl ==========
@@ -52,7 +52,7 @@ execute_process(COMMAND "${CMAKE_COMMAND}" --build . WORKING_DIRECTORY "${CMAKE_
 add_subdirectory("${CMAKE_BINARY_DIR}/test/gtest-src" "${CMAKE_BINARY_DIR}/test/gtest-build")
 
 enable_testing()
-set(test_src test/leto_test.cpp test/libs/curl/curl.cpp test/libs/json/json.cpp test/libs/web_server/web_server.cpp test/spotify/utility/curl_url.cpp test/spotify/auth_impl.cpp test/mock/mock_web_browser.h test/mock/mock_web_browser.cpp)
+set(test_src test/leto_test.cpp test/libs/curl/curl.cpp test/libs/json/json.cpp test/libs/web_server/web_server.cpp test/spotify/utility/curl_escape_test.cpp test/spotify/auth_impl.cpp test/mock/mock_web_browser.h test/mock/mock_web_browser.cpp)
 add_executable(${TEST_NAME} ${test_src})
 target_link_libraries(${TEST_NAME} gtest gtest_main pthread)
 target_link_libraries(${TEST_NAME} ${CORE_NAME})

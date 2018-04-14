@@ -1,14 +1,18 @@
 #include <iostream>
 #include <thread>
 #include <unistd.h>
+#include <spotify/auth.h>
+#include <spotify/auth_impl.h>
 #include "leto.h"
 #include "utility/netsurf.h"
 
 using namespace std;
 
 void loop(){
-    auto webBrowser = Netsurf();
-    webBrowser.open("http://google.com");
+    auto netsurf = Netsurf();
+    auto config = Config();
+    auto auth = AuthImpl(&config,&netsurf);
+    auth.launch();
     auto * leto = new Leto();
     while (leto->running()){
         leto->compute();

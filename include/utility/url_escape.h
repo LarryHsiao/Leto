@@ -7,7 +7,7 @@
 
 #include <string>
 
-class Url {
+class UrlEscape {
 public:
     virtual std::string escape() = 0;
 };
