@@ -7,7 +7,7 @@
 
 #include "utility/web_browser.h"
 
-class Netsurf : WebBrowser{
+class Netsurf : public WebBrowser{
 public:
     void open(std::string url) override;
 };
