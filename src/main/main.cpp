@@ -4,12 +4,12 @@
 #include <spotify/auth.h>
 #include <spotify/auth_impl.h>
 #include "leto.h"
-#include "utility/netsurf.h"
+#include "utility/opera.h"
 
 using namespace std;
 
 void loop(){
-    auto netsurf = Netsurf();
+    auto netsurf = Opera();
     auto config = Config();
     auto auth = AuthImpl(&config,&netsurf);
     auth.launch();

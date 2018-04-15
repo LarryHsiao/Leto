@@ -39,7 +39,7 @@ target_link_libraries(${CORE_NAME} simple-web-server)
 # web server ----------
 
 # main ==========
-add_executable(${PROJECT_NAME} src/main/main.cpp src/main/utility/netsurf.cpp src/main/utility/netsurf.h)
+add_executable(${PROJECT_NAME} src/main/main.cpp src/main/utility/netsurf.cpp src/main/utility/netsurf.h src/main/utility/opera.cpp src/main/utility/opera.h)
 target_link_libraries(${PROJECT_NAME} pthread)
 target_link_libraries(${PROJECT_NAME} ${CORE_NAME})
 # main ----------
