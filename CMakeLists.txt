@@ -15,12 +15,9 @@ set(sources src/core/leto.cpp src/core/spotify/auth_impl.cpp src/core/spotify/co
 add_library(${CORE_NAME} ${headers} ${sources})
 
 # curl ==========
-configure_file(libs/curl.cmake libs/curl/CMakeLists.txt)
-execute_process(COMMAND "${CMAKE_COMMAND}" -G "${CMAKE_GENERATOR}" . WORKING_DIRECTORY "${CMAKE_BINARY_DIR}/libs/curl/")
-execute_process(COMMAND "${CMAKE_COMMAND}" --build . WORKING_DIRECTORY "${CMAKE_BINARY_DIR}/libs/curl/")
-add_subdirectory("${CMAKE_BINARY_DIR}/libs/curl/source/" "${CMAKE_BINARY_DIR}/libs/curl/build")
-include_directories("${CMAKE_BINARY_DIR}/libs/curl/source/include")
-target_link_libraries(${CORE_NAME} libcurl)
+find_package(CURL REQUIRED)
+include_directories(${CURL_INCLUDE_DIR})
+target_link_libraries(${CORE_NAME} ${CURL_LIBRARY})
 # curl ----------
 
 # json ==========
