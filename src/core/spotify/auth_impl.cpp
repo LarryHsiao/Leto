@@ -11,6 +11,7 @@
 #include <server_http.hpp>
 #include <condition_variable>
 #include <chrono>
+#include "auth_url.h"
 
 using namespace std;
 using namespace SimpleWeb;
@@ -24,20 +25,17 @@ void AuthImpl::launch() {
                                                      shared_ptr<HttpServer::Request> request) {
         auto queryParameters = request->parse_query_string();
         auto code = queryParameters.find("code")->second;
-        cout << "This is code " << code << endl;
         success = true;
+
+        *response << "HTTP/1.1 301 Moved Permanently\r\n"
+                  << "Location: https://www.spotify.com" << "\r\n\r\n";
     };
 
     thread serverThread([&]() {
         server.start();
     });
-    std::string rawUrl("https://accounts.spotify.com/authorize?response_type=code");
-    rawUrl += "&client_id=";
-    rawUrl += CurlUrlEscape(config.clientId()).escape();
-    rawUrl += "&redirect_uri=" + CurlUrlEscape("http://localhost:").escape();
-    rawUrl += std::string(std::to_string(config.port()));
-    rawUrl += CurlUrlEscape(config.redirectPath()).escape();
-    browser->open(rawUrl);
+
+    browser->open(AuthUrl(config).value());
 
     mutex mutex;
     unique_lock<std::mutex> lock(mutex);
