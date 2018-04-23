@@ -11,7 +11,7 @@ set (CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 
 include_directories(include)
 set(headers include/leto.h include/utility/web_browser.h include/spotify/auth.h include/utility/url_escape.h)
-set(sources src/core/leto.cpp src/core/spotify/auth_impl.cpp src/core/spotify/config/config.cpp include/spotify/auth_impl.h include/spotify/config/config.h src/core/utility/curl_escape.cpp include/utility/curl_escape.h src/core/spotify/auth_callback_server.cpp src/core/spotify/auth_callback_server.h)
+set(sources src/core/leto.cpp src/core/spotify/auth_impl.cpp src/core/spotify/config/config.cpp include/spotify/auth_impl.h include/spotify/config/config.h src/core/utility/curl_escape.cpp include/utility/curl_escape.h)
 add_library(${CORE_NAME} ${headers} ${sources})
 
 # curl ==========
@@ -44,6 +44,13 @@ target_link_libraries(${PROJECT_NAME} pthread)
 target_link_libraries(${PROJECT_NAME} ${CORE_NAME})
 # main ----------
 
+# main ==========
+set(PROJECT_WIN ${PROJECT_NAME}_win)
+add_executable(${PROJECT_WIN} src/main_win/main.cpp src/main_win/utility/browser_default.cpp src/main_win/utility/browser_default.h)
+target_link_libraries(${PROJECT_WIN} pthread)
+target_link_libraries(${PROJECT_WIN} ${CORE_NAME})
+# main ----------
+
 # Unit testing ==========
 configure_file(test/CMakeLists.txt test/gtest-download/CMakeLists.txt)
 execute_process(COMMAND "${CMAKE_COMMAND}" -G "${CMAKE_GENERATOR}" . WORKING_DIRECTORY "${CMAKE_BINARY_DIR}/test/gtest-download")
@@ -52,8 +59,7 @@ execute_process(COMMAND "${CMAKE_COMMAND}" --build . WORKING_DIRECTORY "${CMAKE_
 add_subdirectory("${CMAKE_BINARY_DIR}/test/gtest-src" "${CMAKE_BINARY_DIR}/test/gtest-build")
 
 enable_testing()
-set(test_src test/leto_test.cpp test/libs/curl/curl.cpp test/libs/json/json.cpp test/libs/web_server/web_server.cpp test/spotify/utility/curl_escape_test.cpp test/spotify/auth_impl.cpp test/mock/mock_web_browser.h test/mock/mock_web_browser.cpp)
-add_executable(${TEST_NAME} ${test_src})
+add_executable(${TEST_NAME} test/leto_test.cpp test/libs/curl/curl.cpp test/libs/json/json.cpp test/libs/web_server/web_server.cpp test/spotify/utility/curl_escape_test.cpp test/spotify/auth_impl.cpp test/mock/mock_web_browser.h test/mock/mock_web_browser.cpp)
 target_link_libraries(${TEST_NAME} gtest gtest_main pthread)
 target_link_libraries(${TEST_NAME} ${CORE_NAME})
 

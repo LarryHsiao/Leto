@@ -1,18 +1,20 @@
-#include <iostream>
-#include <thread>
-#include <unistd.h>
-#include <spotify/auth.h>
-#include <spotify/auth_impl.h>
-#include "leto.h"
-#include "utility/opera.h"
+//
+// Created by Larry Hsiao on 4/20/2018.
+//
 
+#include <leto.h>
+#include <thread>
+#include <spotify/auth_impl.h>
+#include <spotify/auth.h>
+#include <unistd.h>
+#include "utility/browser_default.h"
 
 using namespace std;
 
 void loop(){
-    auto netsurf = Opera();
+    auto browser = BrowserDefault();
     auto config = Config();
-    auto auth = AuthImpl(config, &netsurf);
+    auto auth = AuthImpl(config, &browser);
     auth.launch();
     auto * leto = new Leto();
     while (leto->running()){

@@ -6,7 +6,7 @@
 #include "netsurf.h"
 
 void Netsurf::open(std::string url) {
-    auto command = std::string("DISPLAY=:0 netsurf '") + url+"'";
+    auto command = std::string("DISPLAY=:0 netsurf '") + url+"' &";
     system(command.c_str());
 }
 

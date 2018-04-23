@@ -12,7 +12,7 @@ TEST(AuthImpl, triggered){
     MockWebBrowser webBrowser([&](){
         launched = true;
     });
-    AuthImpl auth(&config, &webBrowser);
+    AuthImpl auth(config, &webBrowser);
     auth.launch();
     ASSERT_TRUE(launched);
 }

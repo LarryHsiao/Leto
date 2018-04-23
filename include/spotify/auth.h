@@ -4,6 +4,9 @@
 
 #ifndef LETO_AUTH_H
 #define LETO_AUTH_H
+
+#include <functional>
+
 class Auth {
 public:
     virtual void launch() = 0;
