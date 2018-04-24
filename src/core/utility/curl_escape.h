@@ -5,12 +5,12 @@
 #ifndef LETO_URL_IMPL_H
 #define LETO_URL_IMPL_H
 
-#include <utility/url_escape.h>
+#include <string>
 
-class CurlUrlEscape :UrlEscape{
+class CurlUrlEscape{
 public:
     explicit CurlUrlEscape(std::string input);
-    std::string escape() override;
+    std::string escape();
 
 private:
     const std::string raw;

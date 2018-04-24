@@ -11,8 +11,8 @@ set (CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 set (CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 
 include_directories(include)
-set(headers include/leto.h include/utility/web_browser.h include/spotify/auth.h include/utility/url_escape.h)
-set(sources src/core/leto.cpp src/core/spotify/auth_impl.cpp src/core/spotify/config/config.cpp include/spotify/auth_impl.h include/spotify/config/config.h src/core/utility/curl_escape.cpp include/utility/curl_escape.h src/core/spotify/auth_url.cpp src/core/spotify/auth_url.h)
+set(headers include/leto.h include/utility/web_browser.h include/spotify/auth.h)
+set(sources src/core/leto.cpp src/core/spotify/auth_impl.cpp src/core/spotify/config/config.cpp include/spotify/auth_impl.h include/spotify/config/config.h src/core/utility/curl_escape.cpp src/core/utility/curl_escape.h src/core/spotify/auth_url.cpp src/core/spotify/auth_url.h)
 add_library(${CORE_NAME} ${headers} ${sources})
 
 # sqlite ==========

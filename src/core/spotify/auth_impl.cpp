@@ -4,9 +4,8 @@
 
 #include <utility/web_browser.h>
 #include <curl/curl.h>
-#include <utility/url_escape.h>
 #include <spotify/auth_impl.h>
-#include <utility/curl_escape.h>
+#include "../utility/curl_escape.h"
 #include <iostream>
 #include <server_http.hpp>
 #include <condition_variable>

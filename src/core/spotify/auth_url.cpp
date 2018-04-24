@@ -3,7 +3,7 @@
 //
 
 #include <string>
-#include <utility/curl_escape.h>
+#include "../utility/curl_escape.h"
 #include "auth_url.h"
 
 using namespace std;
