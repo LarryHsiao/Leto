@@ -11,8 +11,8 @@ set (CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 set (CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 
 include_directories(include)
-set(headers include/leto.h include/utility/web_browser.h include/spotify/auth.h)
-set(sources src/core/leto.cpp src/core/spotify/auth_impl.cpp src/core/spotify/config/config.cpp include/spotify/auth_impl.h include/spotify/config/config.h src/core/utility/curl_escape.cpp src/core/utility/curl_escape.h src/core/spotify/auth_url.cpp src/core/spotify/auth_url.h)
+set(headers include/leto.h include/utility/web_browser.h include/spotify/auth.h include/storage/pair_storage.h)
+set(sources src/core/leto.cpp src/core/spotify/auth_impl.cpp src/core/spotify/config/config.cpp include/spotify/auth_impl.h include/spotify/config/config.h src/core/utility/curl_escape.cpp src/core/utility/curl_escape.h src/core/spotify/auth_url.cpp src/core/spotify/auth_url.h src/core/storage/memory_storage.cpp src/core/storage/memory_storage.h)
 add_library(${CORE_NAME} ${headers} ${sources})
 
 # sqlite ==========
@@ -66,7 +66,7 @@ execute_process(COMMAND "${CMAKE_COMMAND}" --build . WORKING_DIRECTORY "${CMAKE_
 add_subdirectory("${CMAKE_BINARY_DIR}/test/gtest-src" "${CMAKE_BINARY_DIR}/test/gtest-build")
 
 enable_testing()
-add_executable(${TEST_NAME} test/leto_test.cpp test/libs/curl/curl.cpp test/libs/json/json.cpp test/libs/web_server/web_server.cpp test/spotify/utility/curl_escape_test.cpp test/spotify/auth_impl.cpp test/mock/mock_web_browser.h test/mock/mock_web_browser.cpp test/libs/sqlite/sqlite_test.cpp)
+add_executable(${TEST_NAME} test/leto_test.cpp test/libs/curl/curl.cpp test/libs/json/json.cpp test/libs/web_server/web_server.cpp test/spotify/utility/curl_escape_test.cpp test/spotify/auth_impl.cpp test/mock/mock_web_browser.h test/mock/mock_web_browser.cpp test/libs/sqlite/sqlite_test.cpp test/storage/memory_storage_test.cpp)
 target_link_libraries(${TEST_NAME} gtest gtest_main pthread)
 target_link_libraries(${TEST_NAME} ${CORE_NAME})
 
