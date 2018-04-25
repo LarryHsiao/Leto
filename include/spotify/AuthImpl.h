@@ -5,9 +5,9 @@
 #ifndef LETO_AUTHIMPL_H
 #define LETO_AUTHIMPL_H
 
-#include <spotify/auth.h>
-#include <utility/web_browser.h>
-#include <spotify/config/config.h>
+#include <spotify/Auth.h>
+#include <utility/WebBrowser.h>
+#include <spotify/config/Config.h>
 #include <functional>
 #include <chrono>
 

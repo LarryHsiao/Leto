@@ -5,10 +5,10 @@
 #ifndef LETO_BROWSER_DEFAULT_H
 #define LETO_BROWSER_DEFAULT_H
 
-#include <utility/web_browser.h>
+#include <utility/WebBrowser.h>
 
 
-class BrowserDefault : public WebBrowser{
+class DefaultBrowser : public WebBrowser{
 public:
     void open(std::string url) override;
 

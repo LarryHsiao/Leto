@@ -9,7 +9,7 @@
 
 using namespace std;
 
-class PairStorage {
+class PairDB {
 public:
     virtual void store(string key, string value) = 0;
     virtual string value(string key) = 0;

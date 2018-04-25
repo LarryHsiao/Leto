@@ -2,7 +2,7 @@
 // Created by Larry Hsiao on 4/14/2018.
 //
 
-#include "mock_web_browser.h"
+#include "MockWebBrowser.h"
 
 void MockWebBrowser::open(std::string url) {
     callback();

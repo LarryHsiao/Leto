@@ -2,17 +2,17 @@
 // Created by Larry Hsiao on 4/20/2018.
 //
 
-#include <leto.h>
+#include <Leto.h>
 #include <thread>
-#include <spotify/auth_impl.h>
-#include <spotify/auth.h>
+#include <spotify/AuthImpl.h>
+#include <spotify/Auth.h>
 #include <unistd.h>
-#include "utility/browser_default.h"
+#include "utility/DefaultBrowser.h"
 
 using namespace std;
 
 void loop(){
-    auto browser = BrowserDefault();
+    auto browser = DefaultBrowser();
     auto config = Config();
     auto auth = AuthImpl(config, &browser);
     auth.launch();

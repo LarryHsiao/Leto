@@ -11,8 +11,8 @@ set (CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 set (CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 
 include_directories(include)
-set(headers include/leto.h include/utility/web_browser.h include/spotify/auth.h include/storage/pair_storage.h)
-set(sources src/core/leto.cpp src/core/spotify/auth_impl.cpp src/core/spotify/config/config.cpp include/spotify/auth_impl.h include/spotify/config/config.h src/core/utility/curl_escape.cpp src/core/utility/curl_escape.h src/core/spotify/auth_url.cpp src/core/spotify/auth_url.h src/core/storage/memory_storage.cpp src/core/storage/memory_storage.h)
+set(headers include/Leto.h include/utility/WebBrowser.h include/spotify/Auth.h include/storage/PairDB.h)
+set(sources src/core/Leto.cpp src/core/spotify/AuthImpl.cpp src/core/spotify/config/Config.cpp include/spotify/AuthImpl.h include/spotify/config/Config.h src/core/utility/CurlEscape.cpp src/core/utility/CurlEscape.h src/core/spotify/AuthUrl.cpp src/core/spotify/AuthUrl.h src/core/storage/MemoryPairDB.cpp src/core/storage/MemoryPairDB.h)
 add_library(${CORE_NAME} ${headers} ${sources})
 
 # sqlite ==========
@@ -46,14 +46,14 @@ target_link_libraries(${CORE_NAME} simple-web-server)
 # web server ----------
 
 # main ==========
-add_executable(${PROJECT_NAME} src/main/main.cpp src/main/utility/netsurf.cpp src/main/utility/netsurf.h src/main/utility/opera.cpp src/main/utility/opera.h)
+add_executable(${PROJECT_NAME} src/main/main.cpp src/main/utility/NetSurf.cpp src/main/utility/NetSurf.h src/main/utility/Opera.cpp src/main/utility/Opera.h)
 target_link_libraries(${PROJECT_NAME} pthread)
 target_link_libraries(${PROJECT_NAME} ${CORE_NAME})
 # main ----------
 
 # main ==========
 set(PROJECT_WIN ${PROJECT_NAME}_win)
-add_executable(${PROJECT_WIN} src/main_win/main.cpp src/main_win/utility/browser_default.cpp src/main_win/utility/browser_default.h)
+add_executable(${PROJECT_WIN} src/main_win/main.cpp src/main_win/utility/DefaultBrowser.cpp src/main_win/utility/DefaultBrowser.h)
 target_link_libraries(${PROJECT_WIN} pthread)
 target_link_libraries(${PROJECT_WIN} ${CORE_NAME})
 # main ----------
@@ -66,7 +66,7 @@ execute_process(COMMAND "${CMAKE_COMMAND}" --build . WORKING_DIRECTORY "${CMAKE_
 add_subdirectory("${CMAKE_BINARY_DIR}/test/gtest-src" "${CMAKE_BINARY_DIR}/test/gtest-build")
 
 enable_testing()
-add_executable(${TEST_NAME} test/leto_test.cpp test/libs/curl/curl.cpp test/libs/json/json.cpp test/libs/web_server/web_server.cpp test/spotify/utility/curl_escape_test.cpp test/spotify/auth_impl.cpp test/mock/mock_web_browser.h test/mock/mock_web_browser.cpp test/libs/sqlite/sqlite_test.cpp test/storage/memory_storage_test.cpp)
+add_executable(${TEST_NAME} test/LetoTest.cpp test/libs/curl/CurlTest.cpp test/libs/json/JsonTest.cpp test/libs/web_server/WebServerTest.cpp test/spotify/utility/CurlEscapeTest.cpp test/spotify/AuthImplTest.cpp test/mock/MockWebBrowser.h test/mock/MockWebBrowser.cpp test/libs/sqlite/SqliteTest.cpp test/storage/MemoryStorageTest.cpp)
 target_link_libraries(${TEST_NAME} gtest gtest_main pthread)
 target_link_libraries(${TEST_NAME} ${CORE_NAME})
 

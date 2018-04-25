@@ -3,7 +3,7 @@
 //
 
 #include <curl/curl.h>
-#include "curl_escape.h"
+#include "CurlEscape.h"
 
 std::string CurlUrlEscape::escape() {
     CURL *curl = curl_easy_init();

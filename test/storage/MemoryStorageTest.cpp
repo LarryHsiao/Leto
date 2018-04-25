@@ -3,28 +3,28 @@
 //
 
 #include<gtest/gtest.h>
-#include "../../src/core/storage/memory_storage.h"
+#include "../../src/core/storage/MemoryPairDB.h"
 
 TEST(MemoryStorage, store) {
-    auto storage = MemoryStorage();
+    auto storage = MemoryPairDB();
     storage.store("key", "value");
     ASSERT_EQ("value", storage.value("key"));
 }
 
 TEST(MemoryStorage, NonExistKey) {
-    auto storage = MemoryStorage();
+    auto storage = MemoryPairDB();
     ASSERT_EQ("", storage.value("key"));
 }
 
 TEST(MemoryStorage, replaceKey) {
-    auto storage = MemoryStorage();
+    auto storage = MemoryPairDB();
     storage.store("key", "value");
     storage.store("key", "NewValue");
     ASSERT_EQ("NewValue", storage.value("key"));
 }
 
 TEST(MemoryStorage, clear) {
-    auto storage = MemoryStorage();
+    auto storage = MemoryPairDB();
     storage.store("key", "value");
     storage.clear();
     ASSERT_EQ("", storage.value("key"));

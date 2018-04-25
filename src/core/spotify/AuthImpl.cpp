@@ -2,15 +2,15 @@
 // Created by Larry Hsiao on 4/13/2018.
 //
 
-#include <utility/web_browser.h>
+#include <utility/WebBrowser.h>
 #include <curl/curl.h>
-#include <spotify/auth_impl.h>
-#include "../utility/curl_escape.h"
+#include <spotify/AuthImpl.h>
+#include "../utility/CurlEscape.h"
 #include <iostream>
 #include <server_http.hpp>
 #include <condition_variable>
 #include <chrono>
-#include "auth_url.h"
+#include "AuthUrl.h"
 
 using namespace std;
 using namespace SimpleWeb;

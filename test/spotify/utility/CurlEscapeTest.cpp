@@ -3,7 +3,7 @@
 //
 
 #include <gtest/gtest.h>
-#include "../../../src/core/utility/curl_escape.h"
+#include "../../../src/core/utility/CurlEscape.h"
 
 TEST(CurlUrl, escape){
     CurlUrlEscape curlUrl("https://google.com?param=\\/fds");

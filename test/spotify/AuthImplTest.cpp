@@ -3,8 +3,8 @@
 //
 
 #include <gtest/gtest.h>
-#include "spotify/auth_impl.h"
-#include "../mock/mock_web_browser.h"
+#include "spotify/AuthImpl.h"
+#include "../mock/MockWebBrowser.h"
 
 TEST(AuthImpl, triggered){
     bool launched =false;

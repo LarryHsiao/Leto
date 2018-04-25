@@ -1,10 +1,10 @@
 #include <iostream>
 #include <thread>
 #include <unistd.h>
-#include <spotify/auth.h>
-#include <spotify/auth_impl.h>
-#include "leto.h"
-#include "utility/opera.h"
+#include <spotify/Auth.h>
+#include <spotify/AuthImpl.h>
+#include "Leto.h"
+#include "utility/Opera.h"
 
 
 using namespace std;

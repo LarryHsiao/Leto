@@ -5,7 +5,7 @@
 #ifndef LETO_MOCK_WEB_BROWSER_H
 #define LETO_MOCK_WEB_BROWSER_H
 
-#include <utility/web_browser.h>
+#include <utility/WebBrowser.h>
 #include <functional>
 
 class MockWebBrowser: public WebBrowser{

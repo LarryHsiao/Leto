@@ -6,7 +6,7 @@
 #define LETO_AUTH_URL_H
 
 
-#include <spotify/config/config.h>
+#include <spotify/config/Config.h>
 
 class AuthUrl {
 public:

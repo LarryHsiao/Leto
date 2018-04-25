@@ -6,7 +6,7 @@
 #define LETO_OPERA_H
 
 
-#include <utility/web_browser.h>
+#include <utility/WebBrowser.h>
 
 class Opera : public WebBrowser{
 public:

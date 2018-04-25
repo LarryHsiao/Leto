@@ -5,7 +5,7 @@
 #ifndef LETO_NETSURF_H
 #define LETO_NETSURF_H
 
-#include "utility/web_browser.h"
+#include "utility/WebBrowser.h"
 
 class Netsurf : public WebBrowser{
 public:
