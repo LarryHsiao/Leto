@@ -14,7 +14,7 @@ public :
     string value(string key) override;
     void clear() override;
 private:
-    map<string, string> keyValue;
+    map<string, string> keyValue{};
 };
 
 #endif //LETO_JSON_STORAGE_H

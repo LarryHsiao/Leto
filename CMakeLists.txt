@@ -46,14 +46,14 @@ target_link_libraries(${CORE_NAME} simple-web-server)
 # web server ----------
 
 # main ==========
-add_executable(${PROJECT_NAME} src/main/main.cpp src/main/utility/NetSurf.cpp src/main/utility/NetSurf.h src/main/utility/Opera.cpp src/main/utility/Opera.h)
+add_executable(${PROJECT_NAME} src/main/Main.cpp src/main/utility/NetSurf.cpp src/main/utility/NetSurf.h src/main/utility/Opera.cpp src/main/utility/Opera.h)
 target_link_libraries(${PROJECT_NAME} pthread)
 target_link_libraries(${PROJECT_NAME} ${CORE_NAME})
 # main ----------
 
 # main ==========
 set(PROJECT_WIN ${PROJECT_NAME}_win)
-add_executable(${PROJECT_WIN} src/main_win/main.cpp src/main_win/utility/DefaultBrowser.cpp src/main_win/utility/DefaultBrowser.h)
+add_executable(${PROJECT_WIN} src/main_win/Main.cpp src/main_win/utility/DefaultBrowser.cpp src/main_win/utility/DefaultBrowser.h)
 target_link_libraries(${PROJECT_WIN} pthread)
 target_link_libraries(${PROJECT_WIN} ${CORE_NAME})
 # main ----------
