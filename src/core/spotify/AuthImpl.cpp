@@ -19,7 +19,7 @@ using HttpServer=Server<HTTP>;
 void AuthImpl::launch() {
     auto success = false;
     HttpServer server;
-    server.config.port = 29901;
+    server.config.port = 39901;
     server.resource["^/auth/callback/"]["GET"] = [&](shared_ptr<HttpServer::Response> response,
                                                      shared_ptr<HttpServer::Request> request) {
         auto queryParameters = request->parse_query_string();
